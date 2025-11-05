@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; connect-src 'self' http://localhost:3000; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; img-src 'self' https: data:;">
+    <title>AI News Analyzer - Powered by Gemini</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Animated Background -->
+    <div class="background-animation">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+        <div class="gradient-overlay"></div>
+    </div>
+
+    <div class="container">
+        <!-- Navigation Bar -->
+        <nav class="navbar">
+            <div class="nav-content">
+                <div class="nav-left">
+                    <div class="logo-compact">
+                        <span class="logo-icon-compact">🤖</span>
+                        <span class="logo-name">Smart News Analyzer</span>
+                    </div>
+                </div>
+                
+                <div class="nav-right">
+                    <!-- Theme Toggle -->
+                    <div class="theme-toggle-wrapper">
+                        <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
+                            <span class="theme-icon sun-icon">☀️</span>
+                            <span class="theme-icon moon-icon">🌙</span>
+                            <span class="toggle-slider"></span>
+                        </button>
+                    </div>
+                    
+                    <!-- Settings Button -->
+                    <button class="icon-btn" id="settingsBtn" title="Settings">
+                        <span>⚙️</span>
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Hero Header -->
+        <header class="hero-header">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="pulse-dot"></span>
+                    <span>AI-Powered Analysis</span>
+                </div>
+                <h1 class="hero-title">
+                    <span class="gradient-text">Intelligent News</span>
+                    <br>Analysis Platform
+                </h1>
+                <p class="hero-subtitle">
+                    Harness the power of Google Gemini AI to analyze, summarize, and understand news articles with unprecedented depth and accuracy.
+                </p>
+                
+                <!-- Quick Stats -->
+                <div class="hero-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">📰</div>
+                        <div class="stat-info">
+                            <div class="stat-value" id="totalArticles">0</div>
+                            <div class="stat-label">Articles Loaded</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🤖</div>
+                        <div class="stat-info">
+                            <div class="stat-value" id="totalAnalyses">0</div>
+                            <div class="stat-label">AI Analyses</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">⚡</div>
+                        <div class="stat-info">
+                            <div class="stat-value">Real-time</div>
+                            <div class="stat-label">Updates</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Advanced Controls -->
+        <div class="controls-advanced">
+            <div class="controls-grid">
+                <!-- Category Selection -->
+                <div class="control-card">
+                    <label class="control-label">
+                        <span class="label-icon">📑</span>
+                        <span>Category</span>
+                    </label>
+                    <div class="select-modern">
+                        <select id="categorySelect">
+                            <option value="general">🌍 General News</option>
+                            <option value="business">💼 Business</option>
+                            <option value="entertainment">🎬 Entertainment</option>
+                            <option value="health">🏥 Health & Wellness</option>
+                            <option value="science">🔬 Science</option>
+                            <option value="sports">⚽ Sports</option>
+                            <option value="technology">💻 Technology</option>
+                        </select>
+                        <div class="select-icon">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Country Selection -->
+                <div class="control-card">
+                    <label class="control-label">
+                        <span class="label-icon">🌐</span>
+                        <span>Country</span>
+                    </label>
+                    <div class="select-modern">
+                        <select id="countrySelect">
+                            <option value="us">🇺🇸 United States</option>
+                            <option value="gb">🇬🇧 United Kingdom</option>
+                            <option value="ca">🇨🇦 Canada</option>
+                            <option value="au">🇦🇺 Australia</option>
+                            <option value="in">🇮🇳 India</option>
+                            <option value="de">🇩🇪 Germany</option>
+                            <option value="fr">🇫🇷 France</option>
+                            <option value="jp">🇯🇵 Japan</option>
+                        </select>
+                        <div class="select-icon">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Page Size -->
+                <div class="control-card">
+                    <label class="control-label">
+                        <span class="label-icon">📊</span>
+                        <span>Articles per Page</span>
+                    </label>
+                    <div class="select-modern">
+                        <select id="pageSizeSelect">
+                            <option value="6">6 Articles</option>
+                            <option value="12" selected>12 Articles</option>
+                            <option value="18">18 Articles</option>
+                            <option value="24">24 Articles</option>
+                        </select>
+                        <div class="select-icon">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                <path d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"/>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Fetch Button -->
+                <div class="control-card control-action">
+                    <button id="fetchNews" class="btn-fetch">
+                        <span class="btn-icon">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                                <path fill-rule="evenodd" d="M4 2a1 1 0 011 1v2.101a7.002 7.002 0 0111.601 2.566 1 1 0 11-1.885.666A5.002 5.002 0 005.999 7H9a1 1 0 010 2H4a1 1 0 01-1-1V3a1 1 0 011-1zm.008 9.057a1 1 0 011.276.61A5.002 5.002 0 0014.001 13H11a1 1 0 110-2h5a1 1 0 011 1v5a1 1 0 11-2 0v-2.101a7.002 7.002 0 01-11.601-2.566 1 1 0 01.61-1.276z"/>
+                            </svg>
+                        </span>
+                        <span class="btn-text">Fetch News</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- View Toggle -->
+            <div class="view-toggle">
+                <button class="view-btn active" data-view="grid" title="Grid View">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M5 3a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2V5a2 2 0 00-2-2H5zM5 11a2 2 0 00-2 2v2a2 2 0 002 2h2a2 2 0 002-2v-2a2 2 0 00-2-2H5zM11 5a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V5zM11 13a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/>
+                    </svg>
+                </button>
+                <button class="view-btn" data-view="list" title="List View">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+
+        <!-- Loading State -->
+        <div id="loading" class="loading-state hidden">
+            <div class="loading-content">
+                <div class="loading-spinner-advanced">
+                    <div class="spinner-orbit"></div>
+                    <div class="spinner-orbit"></div>
+                    <div class="spinner-orbit"></div>
+                    <div class="spinner-core"></div>
+                </div>
+                <h3 class="loading-title">Fetching Latest News</h3>
+                <p class="loading-subtitle">Gathering articles from around the world...</p>
+                <div class="loading-progress">
+                    <div class="progress-bar"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- News Grid -->
+        <div id="newsContainer" class="news-grid" data-view="grid"></div>
+
+        <!-- Empty State -->
+        <div id="emptyState" class="empty-state hidden">
+            <div class="empty-illustration">
+                <div class="empty-circle"></div>
+                <div class="empty-icon">📰</div>
+            </div>
+            <h3 class="empty-title">No Articles Found</h3>
+            <p class="empty-subtitle">Try selecting a different category or country</p>
+            <button class="btn-retry" onclick="fetchNews()">
+                <span>🔄</span>
+                <span>Try Again</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Analysis Modal -->
+    <div id="analysisModal" class="modal hidden">
+        <div class="modal-backdrop"></div>
+        <div class="modal-dialog">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <span class="modal-title-icon">🤖</span>
+                    <div>
+                        <h2>AI Article Analysis</h2>
+                        <p>Powered by Google Gemini</p>
+                    </div>
+                </div>
+                <button class="modal-close" id="closeModal">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6L6 18M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="modal-content" id="analysisContent">
+                <div class="analysis-loading">
+                    <div class="loading-spinner-advanced">
+                        <div class="spinner-orbit"></div>
+                        <div class="spinner-orbit"></div>
+                        <div class="spinner-orbit"></div>
+                        <div class="spinner-core"></div>
+                    </div>
+                    <h3>Analyzing Article...</h3>
+                    <p>Our AI is reading and understanding the content</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settingsModal" class="modal hidden">
+        <div class="modal-backdrop"></div>
+        <div class="modal-dialog modal-sm">
+            <div class="modal-header">
+                <div class="modal-title">
+                    <span class="modal-title-icon">⚙️</span>
+                    <div>
+                        <h2>Settings</h2>
+                        <p>Customize your experience</p>
+                    </div>
+                </div>
+                <button class="modal-close" id="closeSettings">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 6L6 18M6 6l12 12"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="modal-content">
+                <div class="settings-group">
+                    <h3>Appearance</h3>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <strong>Theme</strong>
+                            <span>Choose your preferred color scheme</span>
+                        </div>
+                        <div class="theme-selector">
+                            <button class="theme-option" data-theme="light">
+                                <span>☀️</span>
+                                <span>Light</span>
+                            </button>
+                            <button class="theme-option active" data-theme="dark">
+                                <span>🌙</span>
+                                <span>Dark</span>
+                            </button>
+                            <button class="theme-option" data-theme="auto">
+                                <span>🌓</span>
+                                <span>Auto</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-group">
+                    <h3>Preferences</h3>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <strong>Auto-refresh</strong>
+                            <span>Automatically fetch new articles</span>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="autoRefresh">
+                            <span class="switch-slider"></span>
+                        </label>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <strong>Animations</strong>
+                            <span>Enable smooth transitions</span>
+                        </div>
+                        <label class="switch">
+                            <input type="checkbox" id="animations" checked>
+                            <span class="switch-slider"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Container -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- Scroll to Top Button -->
+    <button id="scrollTop" class="scroll-top-btn hidden">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 19V5M5 12l7-7 7 7"/>
+        </svg>
+    </button>
+
+    <script src="script.js"></script>
+</body>
+</html>
