@@ -18,7 +18,7 @@ app.use(express.json());
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
 // Health check endpoint
-app.get('/api/health', (req, res) => {
+app.get('api/health', (req, res) => {
   res.json({ 
     status: 'OK', 
     message: 'Server is running',
